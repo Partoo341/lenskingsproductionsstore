@@ -8,7 +8,7 @@ const STRIPE_PAYMENT_LINK = '#';           // fill when ready
 const PAYPAL_ME_LINK = '#';                // fill when ready
 const VERCEL_API_URL = 'https://lenskingsproductionsstore.vercel.app';
 
-const EVENT_PRICE_KES = 1;
+const EVENT_PRICE_KES = 500;
 const EVENT_NAME = 'Online Music Bootcamp - 2nd Sept 2027';
 const EVENT_DATE = '2nd September 2027';
 const EVENT_TIME = '10:00 AM - 2:00 PM (EAT)';

@@ -2,18 +2,19 @@
 // EVENTS PAGE JAVASCRIPT
 // ============================================
 
-// ⚠️ REPLACE THESE WITH YOUR ACTUAL KEYS
+// ⚠️ CONFIG
 const PAYSTACK_PUBLIC_KEY = 'pk_live_1aa7fea1fb94c722e7ab6b6f656455da169c78fa';
-const STRIPE_PAYMENT_LINK = '#';
-const PAYPAL_ME_LINK = '#';
+const STRIPE_PAYMENT_LINK = '#';           // fill when ready
+const PAYPAL_ME_LINK = '#';                // fill when ready
 const VERCEL_API_URL = 'https://lenskingsproductionsstore.vercel.app';
-const EVENT_PRICE_KES = 1;
+
+const EVENT_PRICE_KES = 500;
 const EVENT_NAME = 'Online Music Bootcamp - 2nd Sept 2027';
 const EVENT_DATE = '2nd September 2027';
 const EVENT_TIME = '10:00 AM - 2:00 PM (EAT)';
 
 // ============================================
-// CANVAS ROUNDED RECT HELPER (must be defined before use)
+// CANVAS ROUNDED RECT HELPER
 // ============================================
 if (!CanvasRenderingContext2D.prototype.roundRect) {
     CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
@@ -89,18 +90,9 @@ function getFormData(prefix) {
     const email = document.getElementById(prefix + 'Email').value.trim();
     const phone = document.getElementById(prefix + 'Phone').value.trim();
 
-    if (!name) {
-        alert('Please enter your full name.');
-        return null;
-    }
-    if (!email || !email.includes('@')) {
-        alert('Please enter a valid email address.');
-        return null;
-    }
-    if (!phone || phone.length < 9) {
-        alert('Please enter a valid phone number.');
-        return null;
-    }
+    if (!name) { alert('Please enter your full name.'); return null; }
+    if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return null; }
+    if (!phone || phone.length < 9) { alert('Please enter a valid phone number.'); return null; }
 
     let cleanPhone = phone.replace(/\D/g, '');
     if (cleanPhone.startsWith('0')) {
@@ -113,74 +105,182 @@ function getFormData(prefix) {
 }
 
 // ============================================
-// TICKET GENERATOR (Canvas-based PNG)
+// ADMIT NUMBER FROM REFERENCE
+// ============================================
+// Uses the last 4 digits of the timestamp in the reference.
+// Example: BOOTCAMP_1728000000001 → ADMIT 0001
+function getAdmitNumber(reference) {
+    const digits = (reference || '').replace(/\D/g, '');
+    const last4 = digits.slice(-4) || '0001';
+    return last4.padStart(4, '0');
+}
+
+// ============================================
+// TICKET GENERATOR — Poster-inspired design
 // ============================================
 function generateTicketImage(customer, reference) {
     const canvas = document.createElement('canvas');
-    canvas.width = 800;
-    canvas.height = 400;
+    canvas.width = 900;
+    canvas.height = 500;
     const ctx = canvas.getContext('2d');
 
-    // Outer gradient background
-    const gradient = ctx.createLinearGradient(0, 0, 800, 400);
-    gradient.addColorStop(0, '#FFD700');
-    gradient.addColorStop(1, '#E63946');
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, 800, 400);
+    const GOLD = '#FFD700';
+    const BLACK = '#0A0A0A';
+    const WHITE = '#FFFFFF';
 
-    // White ticket area
-    ctx.fillStyle = '#FFFFFF';
-    ctx.roundRect(40, 40, 720, 320, 20);
-    ctx.fill();
+    // ---------- BACKGROUND ----------
+    ctx.fillStyle = BLACK;
+    ctx.fillRect(0, 0, 900, 500);
 
-    // Header bar
-    ctx.fillStyle = '#E63946';
-    ctx.roundRect(40, 40, 720, 70, 20);
-    ctx.fill();
+    // Gold double border
+    ctx.strokeStyle = GOLD;
+    ctx.lineWidth = 3;
+    ctx.strokeRect(15, 15, 870, 470);
 
-    // Small yellow strip under header to flatten the rounded bottom
-    ctx.fillStyle = '#E63946';
-    ctx.fillRect(40, 90, 720, 20);
-
-    // Header text
-    ctx.fillStyle = '#FFFFFF';
-    ctx.font = 'bold 26px Poppins, Arial, sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('ONLINE MUSIC BOOTCAMP', 400, 82);
-
-    // Perforation line
-    ctx.beginPath();
-    ctx.setLineDash([6, 6]);
-    ctx.strokeStyle = '#CCCCCC';
+    ctx.strokeStyle = 'rgba(255, 215, 0, 0.35)';
     ctx.lineWidth = 1;
-    ctx.moveTo(60, 130);
-    ctx.lineTo(740, 130);
-    ctx.stroke();
-    ctx.setLineDash([]);
+    ctx.strokeRect(22, 22, 856, 456);
 
-    // Labels + values
-    ctx.textAlign = 'left';
-    ctx.font = 'bold 15px Poppins, Arial, sans-serif';
-    ctx.fillStyle = '#333333';
-    ctx.fillText('Attendee:', 80, 170);
-    ctx.fillText('Date:', 80, 205);
-    ctx.fillText('Time:', 80, 240);
-    ctx.fillText('Ticket ID:', 80, 275);
-    ctx.fillText('Price:', 80, 310);
+    // ---------- LOGO BLOCK ----------
+    ctx.fillStyle = GOLD;
+    ctx.fillRect(45, 45, 60, 60);
 
-    ctx.font = '15px Poppins, Arial, sans-serif';
-    ctx.fillStyle = '#555555';
-    ctx.fillText(customer.name, 220, 170);
-    ctx.fillText(EVENT_DATE, 220, 205);
-    ctx.fillText(EVENT_TIME, 220, 240);
-    ctx.fillText(reference, 220, 275);
-    ctx.fillText('KES ' + EVENT_PRICE_KES, 220, 310);
-
-    // Footer
-    ctx.fillStyle = '#999999';
-    ctx.font = '11px Poppins, Arial, sans-serif';
+    ctx.fillStyle = BLACK;
+    ctx.font = 'bold 44px Arial, sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('Lenskings Productions Store  |  lenskingsproductions.store  |  +254 704 742 748', 400, 345);
+    ctx.textBaseline = 'middle';
+    ctx.fillText('P', 75, 78);
+
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillStyle = GOLD;
+    ctx.font = 'bold 20px Arial, sans-serif';
+    ctx.fillText('LENSKINGS PRODUCTIONS', 120, 68);
+
+    ctx.fillStyle = '#CCCCCC';
+    ctx.font = '12px Arial, sans-serif';
+    ctx.fillText('Capturing Life, Creating Art', 120, 88);
+
+    // ---------- TITLE ----------
+    ctx.fillStyle = GOLD;
+    ctx.font = 'bold 62px Arial, sans-serif';
+    ctx.fillText('ONLINE MUSIC', 45, 180);
+
+    ctx.fillStyle = WHITE;
+    ctx.font = 'bold 62px Arial, sans-serif';
+    ctx.fillText('BOOTCAMP', 45, 245);
+
+    // Date badge
+    ctx.fillStyle = GOLD;
+    ctx.fillRect(45, 270, 250, 42);
+
+    ctx.fillStyle = BLACK;
+    ctx.font = 'bold 22px Arial, sans-serif';
+    ctx.fillText('02 SEP 2027', 65, 300);
+
+    // ============================================
+    // ATTENDEE BOX (right side)
+    // ============================================
+    ctx.fillStyle = 'rgba(255, 215, 0, 0.08)';
+    ctx.fillRect(490, 120, 370, 320);
+
+    ctx.strokeStyle = GOLD;
+    ctx.lineWidth = 2;
+    ctx.strokeRect(490, 120, 370, 320);
+
+    ctx.fillStyle = GOLD;
+    ctx.font = 'bold 15px Arial, sans-serif';
+    ctx.fillText('ATTENDEE TICKET', 510, 148);
+
+    // Divider
+    ctx.strokeStyle = GOLD;
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(510, 158);
+    ctx.lineTo(840, 158);
+    ctx.stroke();
+
+    // Admit number from reference
+    const admitNumber = getAdmitNumber(reference);
+
+    // Fields
+    const fields = [
+        { label: 'NAME', value: customer.name },
+        { label: 'EMAIL', value: customer.email },
+        { label: 'TICKET ID', value: reference, value2: 'ADMIT ' + admitNumber },
+        { label: 'TIME', value: EVENT_TIME },
+        { label: 'VENUE', value: 'Online via Zoom' }
+    ];
+
+    let y = 185;
+    fields.forEach(field => {
+        ctx.fillStyle = GOLD;
+        ctx.font = 'bold 11px Arial, sans-serif';
+        ctx.fillText(field.label, 510, y);
+
+        ctx.fillStyle = WHITE;
+        ctx.font = '14px Arial, sans-serif';
+
+        if (field.value2) {
+            // Two-column row: ticket ID on left, ADMIT # on right
+            let val = String(field.value || '');
+            if (val.length > 18) val = val.substring(0, 16) + '...';
+            ctx.fillText(val, 510, y + 16);
+
+            ctx.fillStyle = GOLD;
+            ctx.font = 'bold 14px Arial, sans-serif';
+            ctx.fillText(field.value2, 730, y + 16);
+        } else {
+            let val = String(field.value || '');
+            if (val.length > 34) val = val.substring(0, 32) + '...';
+            ctx.fillText(val, 510, y + 16);
+        }
+
+        y += 42;
+    });
+
+    // ============================================
+    // BOTTOM: Price + Admit One pill
+    // ============================================
+    ctx.strokeStyle = 'rgba(255, 215, 0, 0.4)';
+    ctx.beginPath();
+    ctx.moveTo(45, 390);
+    ctx.lineTo(845, 390);
+    ctx.stroke();
+
+    ctx.fillStyle = GOLD;
+    ctx.font = 'bold 36px Arial, sans-serif';
+    ctx.fillText('KES ' + EVENT_PRICE_KES, 45, 440);
+
+    ctx.fillStyle = '#CCCCCC';
+    ctx.font = '13px Arial, sans-serif';
+    ctx.fillText('per attendee', 45, 458);
+
+    // Gold "ADMIT" pill
+    ctx.fillStyle = GOLD;
+    ctx.beginPath();
+    ctx.roundRect(670, 405, 175, 48, 24);
+    ctx.fill();
+
+    ctx.fillStyle = BLACK;
+    ctx.font = 'bold 20px Arial, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('ADMIT ' + admitNumber, 757, 436);
+
+    // ============================================
+    // FOOTER STRIP
+    // ============================================
+    ctx.fillStyle = 'rgba(255, 215, 0, 0.18)';
+    ctx.fillRect(15, 460, 870, 25);
+
+    ctx.fillStyle = GOLD;
+    ctx.font = '11px Arial, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(
+        'lenskingsproductions.store   |   +254 704 742 748   |   +255 761 927 157',
+        450,
+        477
+    );
 
     return canvas.toDataURL('image/png');
 }
@@ -190,6 +290,7 @@ function generateTicketImage(customer, reference) {
 // ============================================
 async function sendTicketEmail(customer, reference) {
     const ticketImage = generateTicketImage(customer, reference);
+    const admitNumber = getAdmitNumber(reference);
 
     try {
         const response = await fetch(`${VERCEL_API_URL}/api/send-ticket`, {
@@ -199,6 +300,7 @@ async function sendTicketEmail(customer, reference) {
                 name: customer.name,
                 email: customer.email,
                 reference: reference,
+                admitNumber: admitNumber,
                 ticketImage: ticketImage,
                 eventName: EVENT_NAME,
                 eventDate: EVENT_DATE,
@@ -215,29 +317,29 @@ async function sendTicketEmail(customer, reference) {
 }
 
 // ============================================
-// SUCCESS HANDLER (shared across payment methods)
+// SUCCESS HANDLER
 // ============================================
 async function handleSuccess(customer, reference, method) {
-    // Generate + send the ticket email
     const emailSent = await sendTicketEmail(customer, reference);
+    const admitNumber = getAdmitNumber(reference);
 
     if (emailSent) {
         alert(
             `✅ Payment Successful!\n\n` +
-            `A confirmation email with your ticket has been sent to ${customer.email}.\n\n` +
+            `Ticket ADMIT #${admitNumber} has been sent to ${customer.email}.\n\n` +
             `Thank you, ${customer.name}!`
         );
     } else {
         alert(
             `✅ Payment Successful!\n\n` +
             `We could not send your ticket automatically.\n` +
-            `Please send your reference to WhatsApp +254 704 742 748 to receive your ticket.`
+            `Please send reference ${reference} to WhatsApp +254 704 742 748.`
         );
     }
 
-    // Also send WhatsApp confirmation to you
     const message = encodeURIComponent(
         `Hello! I have successfully paid KES ${EVENT_PRICE_KES} for the Online Music Bootcamp.\n\n` +
+        `ADMIT #${admitNumber}\n` +
         `Name: ${customer.name}\n` +
         `Email: ${customer.email}\n` +
         `Phone: ${customer.phone}\n` +
@@ -277,12 +379,12 @@ function payWithMpesa() {
         },
         callback: function (response) {
             payBtn.disabled = false;
-            payBtn.innerHTML = '<i class="fas fa-lock"></i> Pay KES 500 with M-Pesa';
+            payBtn.innerHTML = '<i class="fas fa-lock"></i> Pay KES ' + EVENT_PRICE_KES + ' with M-Pesa';
             handleSuccess(customer, response.reference, 'M-Pesa (Paystack)');
         },
         onClose: function () {
             payBtn.disabled = false;
-            payBtn.innerHTML = '<i class="fas fa-lock"></i> Pay KES 500 with M-Pesa';
+            payBtn.innerHTML = '<i class="fas fa-lock"></i> Pay KES ' + EVENT_PRICE_KES + ' with M-Pesa';
             alert('Payment was not completed. You can try again or use Manual M-Pesa.');
         }
     });
@@ -296,6 +398,11 @@ function payWithMpesa() {
 function payWithStripe() {
     const customer = getFormData('stripe');
     if (!customer) return;
+
+    if (!STRIPE_PAYMENT_LINK || STRIPE_PAYMENT_LINK === '#') {
+        alert('Card payments are not set up yet. Please use M-Pesa or WhatsApp.');
+        return;
+    }
 
     const stripeUrl = `${STRIPE_PAYMENT_LINK}?prefilled_email=${encodeURIComponent(customer.email)}`;
     window.open(stripeUrl, '_blank');
@@ -314,6 +421,11 @@ function payWithStripe() {
 function payWithPaypal() {
     const customer = getFormData('paypal');
     if (!customer) return;
+
+    if (!PAYPAL_ME_LINK || PAYPAL_ME_LINK === '#') {
+        alert('PayPal is not set up yet. Please use M-Pesa or WhatsApp.');
+        return;
+    }
 
     window.open(PAYPAL_ME_LINK, '_blank');
 

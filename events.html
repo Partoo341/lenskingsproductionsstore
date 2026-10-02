@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Music Bootcamp - Lenskings Productions Store</title>
+    <meta name="description" content="Join Parto Organist for an Online Music Bootcamp on 2nd September 2027. Learn music theory, organ techniques, and get your questions answered live. Tickets KES 500.">
+    
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="images/logo.png">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="events.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Paystack Inline JS -->
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <!-- Stripe JS -->
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div class="contact-info">
+                    <i class="fas fa-phone"></i> <a href="tel:+254704742748">+254 704 742 748</a>
+                    <i class="fas fa-phone"></i> <a href="tel:+255761927157">+255 761 927 157</a>
+                    <i class="fas fa-envelope"></i> <a href="mailto:lenskingsproductions@gmail.com">lenskingsproductions@gmail.com</a>
+                </div>
+                <div class="whatsapp-header">
+                    <i class="fab fa-whatsapp"></i> <a href="https://wa.me/254704742748">Order via WhatsApp</a>
+                </div>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <div class="container">
+                <div class="logo">
+                    <img src="images/logo.png" alt="Lenskings Productions Store Logo" class="logo-img">
+                    <div class="logo-text">
+                        <h1>Lenskings <span>Productions</span> <span class="store">Store</span></h1>
+                        <p class="tagline">Church Pianos & Musical Instruments - Kenya & Tanzania</p>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#pianos">Pianos</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="pianofiles.html">Piano Files</a></li>
+                    <li><a href="events.html" class="active">Events</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <div class="mobile-menu"><i class="fas fa-bars"></i></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- EVENTS HERO -->
+    <section class="events-hero">
+        <div class="container">
+            <h1>Upcoming <span class="highlight">Events</span></h1>
+            <p>Join us for workshops, bootcamps, and worship experiences across East Africa</p>
+        </div>
+    </section>
+
+    <!-- SINGLE EVENT -->
+    <section class="events-section">
+        <div class="container">
+            <div class="event-card">
+                <div class="event-poster">
+                    <img src="images/bootcamp-poster.jpg" alt="Online Music Bootcamp with Parto Organist" onerror="this.src='images/logo.png'">
+                    <div class="event-badge">Online Event</div>
+                </div>
+                
+                <div class="event-details">
+                    <div class="event-date-badge">
+                        <span class="day">02</span>
+                        <span class="month">SEP</span>
+                        <span class="year">2027</span>
+                    </div>
+                    
+                    <h2>Online Music Bootcamp</h2>
+                    <p class="event-subtitle">With Parto Organist - CEO of Lenskings Productions</p>
+                    
+                    <div class="event-meta">
+                        <div class="meta-item"><i class="fas fa-calendar-alt"></i><span>Thursday, 2nd September 2027</span></div>
+                        <div class="meta-item"><i class="fas fa-clock"></i><span>10:00 AM - 2:00 PM (EAT)</span></div>
+                        <div class="meta-item"><i class="fas fa-video"></i><span>Online via Zoom</span></div>
+                        <div class="meta-item"><i class="fas fa-users"></i><span>Open to all pianists and Catholic organists</span></div>
+                    </div>
+                    
+                    <div class="event-description">
+                        <h3>About This Bootcamp</h3>
+                        <p>Join Parto Organist for an intensive online music bootcamp designed for pianists, organists, and worship musicians across East Africa. Learn directly from one of the region's most experienced church musicians.</p>
+                        
+                        <h3>What You Will Learn</h3>
+                        <ul class="event-topics">
+                            <li><i class="fas fa-check-circle"></i> Music theory fundamentals and advanced concepts</li>
+                            <li><i class="fas fa-check-circle"></i> Organ techniques for Catholic and Protestant worship</li>
+                            <li><i class="fas fa-check-circle"></i> Live Q&A — ask Parto any organ questions</li>
+                            <li><i class="fas fa-check-circle"></i> Chord progressions and accompaniment styles</li>
+                            <li><i class="fas fa-check-circle"></i> Worship music arrangement and improvisation</li>
+                            <li><i class="fas fa-check-circle"></i> Building confidence in leading worship</li>
+                        </ul>
+                        
+                        <h3>Who Should Attend</h3>
+                        <ul class="event-topics">
+                            <li><i class="fas fa-user"></i> Church pianists and keyboardists</li>
+                            <li><i class="fas fa-church"></i> Catholic and Protestant organists</li>
+                            <li><i class="fas fa-music"></i> Worship team members</li>
+                            <li><i class="fas fa-graduation-cap"></i> Music students and beginners</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="ticket-section">
+                        <div class="ticket-price">
+                            <span class="price-label">Ticket Price</span>
+                            <span class="price-amount">KES 500</span>
+                            <span class="price-note">per attendee</span>
+                        </div>
+                        <button class="btn-ticket" onclick="openTicketPopup()">
+                            <i class="fas fa-ticket-alt"></i> Buy Ticket Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  <!-- PAYMENT MODAL -->
+<div id="ticketModal" class="modal">
+    <div class="modal-content payment-modal-content">
+        <span class="close" onclick="closeTicketPopup()">&times;</span>
+        
+        <div class="modal-header">
+            <i class="fas fa-ticket-alt"></i>
+            <h2>Buy Your Ticket</h2>
+            <p class="modal-subtitle">Online Music Bootcamp — 2nd Sept 2027</p>
+        </div>
+        
+        <div class="modal-body">
+            <div class="payment-price">KES 500</div>
+            <p class="payment-description">Choose your preferred payment method</p>
+
+            <!-- PAYMENT METHODS (visible immediately) -->
+            <div class="pay-methods-list">
+
+                <!-- M-PESA -->
+                <div class="pay-method-wrapper">
+                    <button class="pay-method-btn mpesa-btn" onclick="toggleForm('mpesaForm')">
+                        <div class="btn-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <div class="btn-text">
+                            <span>Pay with M-Pesa</span>
+                            <small>Fast & secure via Paystack</small>
+                        </div>
+                        <i class="fas fa-chevron-down btn-arrow"></i>
+                    </button>
+
+                    <div id="mpesaForm" class="slide-form">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> Full Name</label>
+                            <input type="text" id="mpesaName" placeholder="e.g. Parto Organist">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-envelope"></i> Email Address</label>
+                            <input type="email" id="mpesaEmail" placeholder="you@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-phone-alt"></i> M-Pesa Phone Number</label>
+                            <input type="tel" id="mpesaPhone" placeholder="254704742748">
+                            <small class="input-hint">Enter without spaces or +</small>
+                        </div>
+                        <button class="btn-pay-now mpesa-pay" onclick="payWithMpesa()">
+                            <i class="fas fa-lock"></i> Pay KES 500 with M-Pesa
+                        </button>
+                    </div>
+                </div>
+
+                <!-- STRIPE -->
+                <div class="pay-method-wrapper">
+                    <button class="pay-method-btn stripe-btn" onclick="toggleForm('stripeForm')">
+                        <div class="btn-icon"><i class="fas fa-credit-card"></i></div>
+                        <div class="btn-text">
+                            <span>Pay with Card</span>
+                            <small>Visa, Mastercard via Stripe</small>
+                        </div>
+                        <i class="fas fa-chevron-down btn-arrow"></i>
+                    </button>
+
+                    <div id="stripeForm" class="slide-form">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> Full Name</label>
+                            <input type="text" id="stripeName" placeholder="e.g. Parto Organist">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-envelope"></i> Email Address</label>
+                            <input type="email" id="stripeEmail" placeholder="you@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-phone-alt"></i> Phone Number</label>
+                            <input type="tel" id="stripePhone" placeholder="254704742748">
+                        </div>
+                        <button class="btn-pay-now stripe-pay" onclick="payWithStripe()">
+                            <i class="fas fa-lock"></i> Pay KES 500 with Card
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PAYPAL -->
+                <div class="pay-method-wrapper">
+                    <button class="pay-method-btn paypal-btn" onclick="toggleForm('paypalForm')">
+                        <div class="btn-icon"><i class="fab fa-paypal"></i></div>
+                        <div class="btn-text">
+                            <span>Pay with PayPal</span>
+                            <small>For international attendees</small>
+                        </div>
+                        <i class="fas fa-chevron-down btn-arrow"></i>
+                    </button>
+
+                    <div id="paypalForm" class="slide-form">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> Full Name</label>
+                            <input type="text" id="paypalName" placeholder="e.g. Parto Organist">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-envelope"></i> Email Address</label>
+                            <input type="email" id="paypalEmail" placeholder="you@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-phone-alt"></i> Phone Number</label>
+                            <input type="tel" id="paypalPhone" placeholder="+254704742748">
+                        </div>
+                        <button class="btn-pay-now paypal-pay" onclick="payWithPaypal()">
+                            <i class="fab fa-paypal"></i> Pay $5 USD with PayPal
+                        </button>
+                    </div>
+                </div>
+
+                <!-- MANUAL M-PESA -->
+                <div class="pay-method-wrapper">
+                    <button class="pay-method-btn manual-btn" onclick="toggleForm('manualForm')">
+                        <div class="btn-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                        <div class="btn-text">
+                            <span>Manual M-Pesa (WhatsApp)</span>
+                            <small>Pay via Paybill & send screenshot</small>
+                        </div>
+                        <i class="fas fa-chevron-down btn-arrow"></i>
+                    </button>
+
+                    <div id="manualForm" class="slide-form">
+                        <div class="form-group">
+                            <label><i class="fas fa-user"></i> Full Name</label>
+                            <input type="text" id="manualName" placeholder="e.g. Parto Organist">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-envelope"></i> Email Address</label>
+                            <input type="email" id="manualEmail" placeholder="you@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-phone-alt"></i> Phone Number</label>
+                            <input type="tel" id="manualPhone" placeholder="254704742748">
+                        </div>
+                        <button class="btn-pay-now manual-pay" onclick="manualMpesaPayment()">
+                            <i class="fab fa-whatsapp"></i> Continue on WhatsApp
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Lenskings <span>Productions</span> <span class="store">Store</span></h3>
+                    <p>Bringing quality instruments to churches across East Africa - Kenya, Tanzania, and beyond</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#pianos">Pianos</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="pianofiles.html">Piano Files</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Connect With Us</h4>
+                    <div class="social-icons">
+                        <a href="https://www.youtube.com/@lenskingsproductions" target="_blank" class="social-youtube"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.tiktok.com/@lenskingsproductions" target="_blank" class="social-tiktok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.instagram.com/parto_organist/" target="_blank" class="social-instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/254704742748" target="_blank" class="social-whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2018-2026 Lenskings Productions Store. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="events.js"></script>
+</body>
+</html>

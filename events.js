@@ -6,8 +6,7 @@
 const PAYSTACK_PUBLIC_KEY = 'pk_live_1aa7fea1fb94c722e7ab6b6f656455da169c78fa';
 const STRIPE_PAYMENT_LINK = '#';
 const PAYPAL_ME_LINK = '#';
-const VERCEL_API_URL = 'https://your-vercel-project.vercel.app';
-
+const VERCEL_API_URL = 'https://lenskingsproductionsstore.vercel.app';
 const EVENT_PRICE_KES = 1;
 const EVENT_NAME = 'Online Music Bootcamp - 2nd Sept 2027';
 const EVENT_DATE = '2nd September 2027';
